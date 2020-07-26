@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const list=['civic','corolla','swift','mira','honda']
+
 const cars = [{
   name: 'civic', model : '2012'},
   {name: 'corolla', model : '2012'},
@@ -10,48 +11,71 @@ const cars = [{
   
 }]
 
+const names = ['areeb','arif','hammad']
+
+const obj = {name: "Hello World Object"}
+const data = ['We', 'are', 'United'] //Show these in seperate tags
+
+const complex = [{company: 'XYZ', jobs: ['Javascript', 'React']}, {company: 'ABC', jobs: ['AngularJs' ,'Ionic']}]
+
 function App() {
-  const [show,setShow] = useState(false)
-  const enter = function(){
-    alert('Hello world.')
-    setShow(true)
+
+  const [list,setList] = useState('alo','piyaz')
+  const [text,setText] = useState('')
+
+  const addItem =function(){
+    const newList = [...list]
+    newList.push(text)
+    setList(newList)
+    setText('')
+     console.log(newList)
   }
+
+  const textGet = function(e){
+   const input = e.target.value
+    setText(input)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
 
-        <input type={Text} placeholder={'enter your name'}/>
-        <button onClick={enter}>Enter</button>
-      <br></br>
-      <ul>
-       {list.map(function(item){
-         return <li>{item}</li>
-        })}
-      </ul>
-      <br></br>
-  {show && < ol>
-  {cars.map(function(item){
-    return <li>{item.name}
-    {item.model}</li>
-  })}
+        <div style = {{paddingBottom: '200px', fontSize: '50px'}}>
+          <p>TODO LIST</p>
+        </div>
+   
+         <div style = {{paddingBottom: '500px'}}>
+        <input  className = 'form-control' type ='text' placeholder = 'enter here' onChange={textGet} value = {text}/>
+        <button className = 'btn btn-primary' onClick={addItem}>ADD</button>
+        </div>
 
-</ol>}
+        {/* <ul>
+          {list.map(function(item){
+            return <li>{item}</li>
+          })}
+        </ul> */}
+
+        <div>
+          <ul>
+          {names.map(function(item){
+            return <li>{item}</li>
+
+          })}
+
+          </ul>
+
+        </div>
+
+
+
 
       </header>
     </div>
+
+  
   );
 }
+
+
 
 export default App;
