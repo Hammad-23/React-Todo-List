@@ -20,7 +20,7 @@ const complex = [{company: 'XYZ', jobs: ['Javascript', 'React']}, {company: 'ABC
 
 function App() {
 
-  const [list,setList] = useState('alo','piyaz')
+  const [list,setList] = useState([])
   const [text,setText] = useState('')
 
   const addItem =function(){
@@ -36,6 +36,15 @@ function App() {
     setText(input)
   }
 
+  const deleteItem = function(index){
+
+    const newList = [...list]
+    newList.splice(index, 1)
+    setList(newList)
+
+
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -44,27 +53,34 @@ function App() {
           <p>TODO LIST</p>
         </div>
    
-         <div style = {{paddingBottom: '500px'}}>
+         <div style = {{paddingBottom: '500px', boxShadow: 'black 0px 4px 4px 2px', width: '300px'}}>
         <input  className = 'form-control' type ='text' placeholder = 'enter here' onChange={textGet} value = {text}/>
         <button className = 'btn btn-primary' onClick={addItem}>ADD</button>
+
+        <ul>
+          {list.map(function(item , index){
+            return <li>
+              {item}
+              <button onClick = {() => deleteItem(index)} className = 'btn btn-success'>Delete</button>
+            
+            </li>
+          })}
+        </ul>
+
         </div>
 
-        {/* <ul>
-          {list.map(function(item){
-            return <li>{item}</li>
-          })}
-        </ul> */}
+      
 
-        <div>
-          <ul>
-          {names.map(function(item){
-            return <li>{item}</li>
+      {/* <div>
+        <ul>
+        {names.map(function(item){
+          return <li>{item}</li>
 
-          })}
+        })}
 
-          </ul>
+        </ul>
 
-        </div>
+      </div> */}
 
 
 
