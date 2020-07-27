@@ -4,24 +4,14 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const cars = [{
-  name: 'civic', model : '2012'},
-  {name: 'corolla', model : '2012'},
-  {name: 'swift', model : '2012'
-  
-}]
-
-const names = ['areeb','arif','hammad']
-
-const obj = {name: "Hello World Object"}
-const data = ['We', 'are', 'United'] //Show these in seperate tags
-
-const complex = [{company: 'XYZ', jobs: ['Javascript', 'React']}, {company: 'ABC', jobs: ['AngularJs' ,'Ionic']}]
 
 function App() {
 
   const [list,setList] = useState([])
   const [text,setText] = useState('')
+  const [update,setUpdate] = useState(false)
+  const [add,setAdd] = useState(true)
+  const [editedindex,setEditedindex] = useState('')
 
   const addItem =function(){
     const newList = [...list]
@@ -45,6 +35,43 @@ function App() {
 
   }
 
+  const editItem = function(index){
+    setAdd(false)
+    const newList = [...list]
+    setText(text)
+    
+    // console.log(index)
+    // const newEdited = [...editedindex]
+    setEditedindex(index) 
+    console.log(editedindex)
+    const edit = newList[index]
+    setText(edit)
+    setUpdate(true)
+    
+   
+
+  }
+
+  const updateItem = function(){
+    const newList = [...list]
+    
+       
+    
+   const finalList = newList.splice(editedindex,1,Text)
+   console.log(finalList)
+   setList()
+    
+    
+    
+    
+    
+   
+
+
+  }
+
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -55,32 +82,25 @@ function App() {
    
          <div style = {{paddingBottom: '500px', boxShadow: 'black 0px 4px 4px 2px', width: '300px'}}>
         <input  className = 'form-control' type ='text' placeholder = 'enter here' onChange={textGet} value = {text}/>
-        <button className = 'btn btn-primary' onClick={addItem}>ADD</button>
-
+       {add && <button className = 'btn btn-primary' onClick={addItem}>ADD</button>}
+       {update && <button style={{marginLeft: '10px'}} className = 'btn btn-warning'  onClick={updateItem}>Update</button>}
+        <br/><br/>
         <ul>
           {list.map(function(item , index){
-            return <li>
+            return( <li>
               {item}
+              
               <button onClick = {() => deleteItem(index)} className = 'btn btn-success'>Delete</button>
+              <button style={{marginLeft: '10px'}} onClick={() =>editItem(index)} className='btn btn-secondary'>Edit</button>
+              
             
-            </li>
+            </li>)
           })}
         </ul>
 
         </div>
 
-      
-
-      {/* <div>
-        <ul>
-        {names.map(function(item){
-          return <li>{item}</li>
-
-        })}
-
-        </ul>
-
-      </div> */}
+    
 
 
 
