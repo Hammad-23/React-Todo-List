@@ -12,6 +12,7 @@ function App() {
   const [update,setUpdate] = useState(false)
   const [add,setAdd] = useState(true)
   const [editedindex,setEditedindex] = useState('')
+  
 
   const addItem =function(){
     const newList = [...list]
@@ -55,11 +56,16 @@ function App() {
   const updateItem = function(){
     const newList = [...list]
     
-       
+       console.log(editedindex)
+       console.log(newList)
+       console.log(text)
     
-   const finalList = newList.splice(editedindex,1,Text)
-   console.log(finalList)
-   setList()
+    newList.splice(editedindex,1,text)
+   console.log(newList)
+   setList(newList)
+   setText('')
+   setUpdate(false)
+   setAdd(true)
     
     
     
@@ -82,8 +88,8 @@ function App() {
    
          <div style = {{paddingBottom: '500px', boxShadow: 'black 0px 4px 4px 2px', width: '300px'}}>
         <input  className = 'form-control' type ='text' placeholder = 'enter here' onChange={textGet} value = {text}/>
-       {add && <button className = 'btn btn-primary' onClick={addItem}>ADD</button>}
-       {update && <button style={{marginLeft: '10px'}} className = 'btn btn-warning'  onClick={updateItem}>Update</button>}
+       { add && <button className = 'btn btn-primary' onClick={addItem}>ADD</button>}
+       { update && <button style={{marginLeft: '10px'}} className = 'btn btn-warning'  onClick={updateItem}>Update</button>}
         <br/><br/>
         <ul>
           {list.map(function(item , index){
